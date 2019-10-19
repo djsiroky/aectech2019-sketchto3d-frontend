@@ -60,9 +60,9 @@ new p5(function(p) {
     disableScroll();
     
     //Initialize the canvas
-    drawCanvas = p.createCanvas(p.windowWidth, p.windowHeight);
+    drawCanvas = p.createCanvas(p.windowWidth - 180, p.windowHeight);
     drawCanvas.id("drawingCanvas");
-    drawCanvas.position(0, 0);    
+    drawCanvas.position(180, 0);    
   }
 
   p.draw = function() {
@@ -139,9 +139,9 @@ new p5(function(p) {
 new p5(function(p) {
 
   	p.setup = function() {
-      uiCanvas = p.createCanvas(p.windowWidth, p.windowHeight);
+      uiCanvas = p.createCanvas(p.windowWidth - 180, p.windowHeight);
       uiCanvas.id("uiCanvas");
-      uiCanvas.position(0, 0);
+      uiCanvas.position(180, 0);
     }
   
   	p.draw = function() {
@@ -149,7 +149,7 @@ new p5(function(p) {
       uiCanvas.clear();
       
       if(showDebug){
-        // p.text("pressure = " + pressure, 10, 20);
+        p.text("pressure = " + pressure, 10, 20);
         
         p.stroke(200,50);
         p.line(p.mouseX,0,p.mouseX,p.height);

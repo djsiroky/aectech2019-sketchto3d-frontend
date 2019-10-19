@@ -21,14 +21,14 @@ canvas {
   z-index: 888;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 180px;
 }
 
 #drawingCanvas canvas {
   z-index: 999;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 180px;
 }
 
 /* The sidebar menu */
