@@ -123,9 +123,16 @@ new p5(function(p) {
       isDrawingJustStarted = false;
     }
 
+    // clearing the canvas
     document.getElementById("ClearButton").onclick = function () { clearCanvas() };
 
     function clearCanvas() {
+      p.clear();
+    }
+
+    document.getElementById("to3DModel").onclick = function(){canvasToModel()};
+
+    function canvasToModel() {
       p.clear();
     }
     
