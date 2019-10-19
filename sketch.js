@@ -122,6 +122,12 @@ new p5(function(p) {
       
       isDrawingJustStarted = false;
     }
+
+    document.getElementById("ClearButton").onclick = function () { clearCanvas() };
+
+    function clearCanvas() {
+      p.clear();
+    }
     
   }
 }, "p5_instance_01");
