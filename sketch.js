@@ -48,15 +48,7 @@ var isDrawingJustStarted = false;
 *    DRAWING CANVAS    *
 ************************/
 new p5(function(p) {
-  let img;
   
-  document.getElementById("myFileInput").onclick = function () { LOAD() };
-
-  function LOAD() {
-    img = p.loadImage('test.jpg');
-    p.image(img, 0, 0);
-  }
-
   p.setup = function() {
     
     // Filters used to smooth position and pressure jitter
@@ -68,9 +60,9 @@ new p5(function(p) {
     disableScroll();
     
     //Initialize the canvas
-    drawCanvas = p.createCanvas(p.windowWidth, p.windowHeight);
+    drawCanvas = p.createCanvas(p.windowWidth - 180, p.windowHeight);
     drawCanvas.id("drawingCanvas");
-    drawCanvas.position(0, 0);    
+    drawCanvas.position(180, 0);    
   }
 
   p.draw = function() {
@@ -137,8 +129,6 @@ new p5(function(p) {
       p.clear();
     }
     
-    
-
   }
 }, "p5_instance_01");
 
@@ -149,17 +139,31 @@ new p5(function(p) {
 new p5(function(p) {
 
   	p.setup = function() {
-      uiCanvas = p.createCanvas(p.windowWidth, p.windowHeight);
+      uiCanvas = p.createCanvas(p.windowWidth - 180, p.windowHeight);
       uiCanvas.id("uiCanvas");
-      uiCanvas.position(0, 0);
+      uiCanvas.position(180, 0);
     }
   
   	p.draw = function() {
       
       uiCanvas.clear();
       
+      if(showDebug){
+        p.text("pressure = " + pressure, 10, 20);
+        
+        p.stroke(200,50);
+        p.line(p.mouseX,0,p.mouseX,p.height);
+        p.line(0,p.mouseY,p.width,p.mouseY);
+
+        // The "loading bar" at the top
+        // is only there as a visual indicator
+        // that the sketch is running
+        p.noStroke();
+        p.fill(100)
+        p.rect(0, 0, p.frameCount % p.width, 4);
+      }
     }
-    
+  	
 
 }, "p5_instance_02");
 
