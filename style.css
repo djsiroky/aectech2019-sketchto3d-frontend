@@ -47,15 +47,15 @@ canvas {
 
 /* The navigation menu links */
 .sidenav button {
-  background-color: rgb(84, 104, 134);
+  background-color: rgba(84, 104, 134, 0);
   border: none;
   color: white;
-  padding: 20% 30%;
+  padding: 5% 5%;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 20% 2px;
   cursor: pointer;
 }
 
