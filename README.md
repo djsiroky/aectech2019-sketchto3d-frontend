@@ -1,4 +1,4 @@
-# GANgaroo
+# SketchGAN
 *a.k.a AECTech2019-sketchto3d-frontend*
 
 ![](assets/Kanganru_Outback.png)
