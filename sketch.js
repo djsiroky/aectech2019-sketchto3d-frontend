@@ -21,6 +21,7 @@ var minBrushSize = 1;
 var brushDensity = 5;
 
 var showDebug = true;
+var showSimplifiedLines = false;
 
 // Jitter smoothing parameters
 // See: http://cristal.univ-lille.fr/~casiez/1euro/
@@ -42,7 +43,11 @@ var drawCanvas, uiCanvas;
 var isPressureInit = false;
 var isDrawing = false;
 var isDrawingJustStarted = false;
-
+var newLineToDraw = false;
+var allPoints = [];
+var reducedPoints = [];
+var lines = [];
+var epsilon = 15;
 
 /***********************
 *    DRAWING CANVAS    *
@@ -63,6 +68,14 @@ new p5(function(p) {
     drawCanvas = p.createCanvas(p.windowWidth/2 - 180, p.windowHeight);
     drawCanvas.id("drawingCanvas");
     drawCanvas.position(180, 0);    
+  }
+
+  p.mouseReleased = function () {
+    if (reducedPoints.length > 0) {
+      lines.push(reducedPoints);
+      reducedPoints = [];
+    }
+    allPoints = [];
   }
 
   p.draw = function() {
@@ -108,12 +121,28 @@ new p5(function(p) {
         p.noStroke();
         p.fill(10)
         p.ellipse(x, y, s);      
+        allPoints.push(p.createVector(x, y));
       }
-
       // Draw an ellipse at the latest position
+      reducedPoints = simplifyLine(allPoints);
       p.noStroke();
       p.fill(10)
       p.ellipse(penX, penY, brushSize);
+
+      if (showSimplifiedLines) {
+        lines.forEach((line) => {
+          p.stroke(255, 0, 255);
+          p.strokeWeight(2);
+          p.noFill();
+          p.beginShape();
+          line.forEach(v => {
+            if (v) {
+              p.vertex(v.x, v.y);
+            }
+          });
+          p.endShape();
+        });
+      }
 
       // Save the latest brush values for next frame
       prevBrushSize = brushSize; 
@@ -131,11 +160,6 @@ new p5(function(p) {
     }
 
     document.getElementById("to3DModel").onclick = function(){canvasToModel()};
-
-    function canvasToModel() {
-      // Call the send to 3d model function here
-      //p.clear();
-    }
     
   }
 }, "p5_instance_01");
@@ -234,3 +258,75 @@ function disableScroll(){
 function enableScroll(){
     document.body.removeEventListener('touchmove', preventDefault, { passive: false });
 }*/
+
+function rdp(startIndex, endIndex, allPoints, rdpPoints) {
+  const nextIndex = findFurthest(allPoints, startIndex, endIndex);
+  if (nextIndex > 0) {
+    if (startIndex != nextIndex) {
+      rdp(startIndex, nextIndex, allPoints, rdpPoints);
+    }
+    rdpPoints.push(allPoints[nextIndex]);
+    if (endIndex != nextIndex) {
+      rdp(nextIndex, endIndex, allPoints, rdpPoints);
+    }
+  }
+}
+
+function findFurthest(points, a, b) {
+  let recordDistance = -1;
+  const start = points[a];
+  const end = points[b];
+  let furthestIndex = -1;
+  for (let i = a + 1; i < b; i++) {
+    const currentPoint = points[i];
+    const d = lineDist(currentPoint, start, end);
+    if (d > recordDistance) {
+      recordDistance = d;
+      furthestIndex = i;
+    }
+  }
+  if (recordDistance > epsilon) {
+    return furthestIndex;
+  } else {
+    return -1;
+  }
+}
+
+function lineDist(c, a, b) {
+  const norm = scalarProjection(c, a, b);
+  return p5.Vector.dist(c, norm);
+}
+
+function scalarProjection(p, a, b) {
+  const ap = p5.Vector.sub(p, a);
+  const ab = p5.Vector.sub(b, a);
+  ab.normalize(); // Normalize the line
+  ab.mult(ap.dot(ab));
+  const normalPoint = p5.Vector.add(a, ab);
+  return normalPoint;
+}
+
+function simplifyLine(allPts) {
+  pts = [];
+  const total = allPts.length;
+  const start = allPts[0];
+  const end = allPts[total - 1];
+  pts.push(start);
+  rdp(0, total - 1, allPts, pts);
+  pts.push(end);
+  return pts;
+}
+
+function canvasToModel() {
+  let linesForBackend = [];
+  lines.forEach(line => {
+    let linePts = [];
+    if (line.length > 0) {
+      line.forEach(pt => {
+        linePts.push([pt.x, pt.y]);
+      });
+    }
+    linesForBackend.push(linePts);
+  });
+  console.log(linesForBackend);
+}
