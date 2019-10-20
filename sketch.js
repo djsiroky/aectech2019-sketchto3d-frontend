@@ -154,18 +154,12 @@ new p5(function(p) {
 
     // clearing the canvas
     document.getElementById("ClearButton").onclick = function () { clearCanvas() };
-    document.getElementById("SendButton").onclick = function () { sendLinework() };
 
     function clearCanvas() {
       p.clear();
     }
 
     document.getElementById("to3DModel").onclick = function(){canvasToModel()};
-
-    function canvasToModel() {
-      // Call the send to 3d model function here
-      //p.clear();
-    }
     
   }
 }, "p5_instance_01");
@@ -323,7 +317,7 @@ function simplifyLine(allPts) {
   return pts;
 }
 
-function sendLinework() {
+function canvasToModel() {
   let linesForBackend = [];
   lines.forEach(line => {
     let linePts = [];
