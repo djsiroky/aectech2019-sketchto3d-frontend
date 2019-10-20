@@ -145,36 +145,35 @@ new p5(function(p) {
 /***********************
 *      UI CANVAS       *
 ************************/
-new p5(function(p) {
+// new p5(function(p) {
 
-  	p.setup = function() {
-      uiCanvas = p.createCanvas(p.windowWidth - 180, p.windowHeight);
-      uiCanvas.id("uiCanvas");
-      uiCanvas.position(180, 0);
-    }
+//   	p.setup = function() {
+//       uiCanvas = p.createCanvas(p.windowWidth - 180, p.windowHeight);
+//       uiCanvas.id("uiCanvas");
+//       uiCanvas.position(180, 0);
+//     }
   
-  	p.draw = function() {
+// //   	p.draw = function() {
       
-      uiCanvas.clear();
+// //       uiCanvas.clear();
       
-      // if(showDebug){
-      //   p.text("pressure = " + pressure, 10, 20);
+// //       // if(showDebug){
+// //       //   p.text("pressure = " + pressure, 10, 20);
         
-      //   p.stroke(200,50);
-      //   p.line(p.mouseX,0,p.mouseX,p.height);
-      //   p.line(0,p.mouseY,p.width,p.mouseY);
+// //       //   p.stroke(200,50);
+// //       //   p.line(p.mouseX,0,p.mouseX,p.height);
+// //       //   p.line(0,p.mouseY,p.width,p.mouseY);
 
-      //   // The "loading bar" at the top
-      //   // is only there as a visual indicator
-      //   // that the sketch is running
-      //   p.noStroke();
-      //   p.fill(100)
-      //   p.rect(0, 0, p.frameCount % p.width, 4);
-      // }
-    }
-  	
+// //       //   // The "loading bar" at the top
+// //       //   // is only there as a visual indicator
+// //       //   // that the sketch is running
+// //       //   p.noStroke();
+// //       //   p.fill(100)
+// //       //   p.rect(0, 0, p.frameCount % p.width, 4);
+// //       // }
+// //     }
 
-}, "p5_instance_02");
+// }, "p5_instance_02");
 
 
 /***********************
@@ -187,7 +186,7 @@ function initPressure() {
   
   	//console.log("Attempting to initialize Pressure.js ");
   
-    Pressure.set('#uiCanvas', {
+  Pressure.set('#drawingCanvas', {
       
       start: function(event){
         // this is called on force start
@@ -219,6 +218,7 @@ function initPressure() {
  		 });
   
 }
+
 
 // Disabling scrolling and bouncing on iOS Safari
 // https://stackoverflow.com/questions/7768269/ipad-safari-disable-scrolling-and-bounce-effect
