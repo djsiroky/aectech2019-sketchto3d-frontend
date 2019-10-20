@@ -133,11 +133,13 @@ new p5(function(p) {
     document.getElementById("to3DModel").onclick = function(){canvasToModel()};
 
     function canvasToModel() {
-      p.clear();
+      // Call the send to 3d model function here
+      //p.clear();
     }
     
   }
 }, "p5_instance_01");
+
 
 
 /***********************

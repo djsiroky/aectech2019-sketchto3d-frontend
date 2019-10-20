@@ -31,6 +31,8 @@ canvas {
   left: 180px;
 }
 
+
+
 /* The sidebar menu */
 .sidenav {
   height: 100%; /* Full-height: remove this if you want "auto" height */
@@ -45,9 +47,29 @@ canvas {
   padding-left: 20px;
 }
 
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
 /* The navigation menu links */
 .sidenav button {
   background-color: rgba(84, 104, 134, 0);
+  border: none;
+  color: white;
+  padding: 5% 5%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20% 2px;
+  cursor: pointer;
+}
+
+/* The button for sending and fetching data from the backend */
+#to3DModel{
+  background-color: rgba(255, 255, 255, 0);
+  position: relative;
+  bottom: -60%;
   border: none;
   color: white;
   padding: 5% 5%;
