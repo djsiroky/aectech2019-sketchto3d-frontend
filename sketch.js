@@ -176,9 +176,10 @@ new p5(function(p) {
       p.background(255);
     }
 
-    document.getElementById("to3DModel").onclick =  () => {
-      sendToRunway((p.windowWidth - sideBarOffset)/2, p.windowHeight, sideBarOffset);
-    };
+    // document.getElementById("to3DModel").onclick =  () => {
+    //   sendToRunway((p.windowWidth - 180)/2, p.windowHeight);
+    // };
+
     
     
   }
