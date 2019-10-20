@@ -77,7 +77,7 @@ canvas {
   background-color: rgba(255, 255, 255, 0);
   position: absolute;
   bottom: 2%;
-  left: 15%;
+  left: 10%;
   border: none;
   color: white;
   padding: 5% 5%;
@@ -87,6 +87,7 @@ canvas {
   font-size: 16px;
   margin: 1em 2px;
   cursor: pointer;
+  width: 80%;
 }
 
 .sidenav > #spacer {
