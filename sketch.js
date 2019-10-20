@@ -356,17 +356,20 @@ function sendToRunway(w, h) {
     .then(response => response.json())
     .then(outputs => {
       const { image } = outputs;
-      let body = document.getElementsByTagName('body')[0];
-      let canvas = document.createElement('canvas');
-      canvas.id = "imageCanvas";
-      canvas.width = w;
-      canvas.height = h;
-      canvas.style.position = 'absolute';
-      let offset = 180 + w;
-      canvas.style.left = `${offset}px`;
-      canvas.style.top = 0;
-      body.append(canvas);
-      let ctx = canvas.getContext('2d');
+      let imgCanvas = document.getElementById('imageCanvas');
+      if (imgCanvas === null) {
+        let body = document.getElementsByTagName('body')[0];
+        imgCanvas = document.createElement('canvas');
+        imgCanvas.id = "imageCanvas";
+        imgCanvas.width = w;
+        imgCanvas.height = h;
+        imgCanvas.style.position = 'absolute';
+        let offset = 180 + w;
+        imgCanvas.style.left = `${offset}px`;
+        imgCanvas.style.top = 0;
+        body.append(imgCanvas);
+      }
+      let ctx = imgCanvas.getContext('2d');
 
       let img = new Image();
       img.onload = function () {
