@@ -67,9 +67,10 @@ canvas {
 
 /* The button for sending and fetching data from the backend */
 #to3DModel{
+  size: 20px;
   background-color: rgba(255, 255, 255, 0);
-  position: relative;
-  bottom: -60%;
+  position: absolute;
+  bottom: 2%;
   border: none;
   color: white;
   padding: 5% 5%;
@@ -77,7 +78,7 @@ canvas {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 20% 2px;
+  margin: 15% 2px;
   cursor: pointer;
 }
 
