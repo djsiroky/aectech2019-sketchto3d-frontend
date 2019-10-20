@@ -28,7 +28,7 @@ canvas {
   z-index: 999;
   position: absolute;
   top: 0;
-  left: 180px;
+  left: 4rem;
 }
 
 
@@ -101,7 +101,7 @@ canvas {
 
 /* Style page content */
 .main {
-  margin-left: 160px; /* Same as the width of the sidebar */
+  margin-left: 4rem; /* Same as the width of the sidebar */
   padding: 0px 10px;
 }
 
