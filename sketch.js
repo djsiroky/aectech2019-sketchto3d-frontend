@@ -48,6 +48,8 @@ var allPoints = [];
 var reducedPoints = [];
 var lines = [];
 var epsilon = 15;
+const IP = '184.105.174.119';
+const PORT = '8000';
 
 /***********************
 *    DRAWING CANVAS    *
@@ -67,6 +69,7 @@ new p5(function(p) {
     //Initialize the canvas
     drawCanvas = p.createCanvas(p.windowWidth/2 - 180, p.windowHeight);
     drawCanvas.id("drawingCanvas");
+    p.background(255);
     drawCanvas.position(180, 0);    
   }
 
@@ -76,6 +79,7 @@ new p5(function(p) {
       reducedPoints = [];
     }
     allPoints = [];
+    sendToRunway();
   }
 
   p.draw = function() {
@@ -330,3 +334,37 @@ function canvasToModel() {
   });
   console.log(linesForBackend);
 }
+
+function sendToRunway() {
+  let canvas = document.getElementById('drawingCanvas');
+  let dataurl = canvas.toDataURL();
+
+  const inputs = { image: dataurl };
+  fetch(`http://${IP}:${PORT}/query`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(inputs),
+  })
+    .then(response => response.json())
+    .then(outputs => {
+      const { image } = outputs;
+      let body = document.getElementsByTagName('body')[0];
+      let canvas = document.createElement('canvas');
+      canvas.id = "imageCanvas";
+      canvas.width = 512;
+      canvas.height = 256;
+      canvas.style.position = 'absolute';
+      canvas.style.right = '100px';
+      body.append(canvas);
+      let ctx = canvas.getContext('2d');
+
+      let img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0, 512, 512);
+      };
+      img.src = image;
+    });
+} 
