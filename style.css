@@ -67,10 +67,10 @@ canvas {
 
 /* The button for sending and fetching data from the backend */
 #to3DModel{
-  size: 20px;
   background-color: rgba(255, 255, 255, 0);
   position: absolute;
   bottom: 2%;
+  left: 15%;
   border: none;
   color: white;
   padding: 5% 5%;
