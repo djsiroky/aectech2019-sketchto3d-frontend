@@ -50,13 +50,15 @@ var lines = [];
 var epsilon = 15;
 const IP = '184.105.174.119';
 const PORT = '8000';
+let sideBarStyle = getComputedStyle(document.getElementsByClassName('sidenav')[0]);
+let sideBarOffset = parseFloat(sideBarStyle.width) + parseFloat(sideBarStyle.paddingLeft) + parseFloat(sideBarStyle.paddingRight);
 
 /***********************
 *    DRAWING CANVAS    *
 ************************/
 new p5(function(p) {
   
-  p.setup = function() {
+  p.setup = () => {
     
     // Filters used to smooth position and pressure jitter
     xFilter = new OneEuroFilter(60, minCutoff, beta, 1.0);
@@ -67,10 +69,19 @@ new p5(function(p) {
     disableScroll();
     
     //Initialize the canvas
-    drawCanvas = p.createCanvas((p.windowWidth - 180)/2, p.windowHeight);
+    drawCanvas = p.createCanvas((p.windowWidth - sideBarOffset)/2, p.windowHeight);
     drawCanvas.id("drawingCanvas");
     p.background(255);
-    drawCanvas.position(180, 0);    
+    drawCanvas.position(sideBarOffset, 0);    
+    drawCanvasElement = document.getElementById('drawingCanvas');
+    drawCanvasElement.addEventListener('pre-img-upload', () => {
+      lines = [];
+      p.clear();
+      p.background(255);
+    });
+    drawCanvasElement.addEventListener('img-upload', () => {
+      sendToRunway((p.windowWidth - sideBarOffset)/2, p.windowHeight, sideBarOffset);
+    });
   }
 
   p.mouseReleased = function () {
@@ -79,7 +90,7 @@ new p5(function(p) {
       reducedPoints = [];
     }
     allPoints = [];
-    sendToRunway((p.windowWidth - 180)/2, p.windowHeight);
+    sendToRunway((p.windowWidth - sideBarOffset)/2, p.windowHeight, sideBarOffset);
   }
 
   p.draw = function() {
@@ -166,7 +177,7 @@ new p5(function(p) {
     }
 
     document.getElementById("to3DModel").onclick =  () => {
-      sendToRunway((p.windowWidth - 180)/2, p.windowHeight);
+      sendToRunway((p.windowWidth - sideBarOffset)/2, p.windowHeight, sideBarOffset);
     };
     
     
@@ -340,7 +351,7 @@ function canvasToModel() {
   console.log(linesForBackend);
 }
 
-function sendToRunway(w, h) {
+function sendToRunway(w, h, sideBarOffset) {
   let dcanvas = document.getElementById('drawingCanvas');
   let dataurl = dcanvas.toDataURL();
 
@@ -364,7 +375,7 @@ function sendToRunway(w, h) {
         imgCanvas.width = w;
         imgCanvas.height = h;
         imgCanvas.style.position = 'absolute';
-        let offset = 180 + w;
+        let offset = sideBarOffset + w;
         imgCanvas.style.left = `${offset}px`;
         imgCanvas.style.top = 0;
         body.append(imgCanvas);
@@ -373,7 +384,7 @@ function sendToRunway(w, h) {
 
       let img = new Image();
       img.onload = function () {
-        ctx.drawImage(img, 0, 0, 512, 512);
+        ctx.drawImage(img, 0, 0, w, h);
       };
       img.src = image;
     });
