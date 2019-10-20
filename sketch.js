@@ -67,7 +67,7 @@ new p5(function(p) {
     disableScroll();
     
     //Initialize the canvas
-    drawCanvas = p.createCanvas(p.windowWidth/2 - 180, p.windowHeight);
+    drawCanvas = p.createCanvas((p.windowWidth - 180)/2, p.windowHeight);
     drawCanvas.id("drawingCanvas");
     p.background(255);
     drawCanvas.position(180, 0);    
@@ -79,7 +79,7 @@ new p5(function(p) {
       reducedPoints = [];
     }
     allPoints = [];
-    sendToRunway();
+    sendToRunway((p.windowWidth - 180)/2, p.windowHeight);
   }
 
   p.draw = function() {
@@ -160,10 +160,15 @@ new p5(function(p) {
     document.getElementById("ClearButton").onclick = function () { clearCanvas() };
 
     function clearCanvas() {
+      lines = [];
       p.clear();
+      p.background(255);
     }
 
-    document.getElementById("to3DModel").onclick = function(){canvasToModel()};
+    document.getElementById("to3DModel").onclick =  () => {
+      sendToRunway((p.windowWidth - 180)/2, p.windowHeight);
+    };
+    
     
   }
 }, "p5_instance_01");
@@ -335,9 +340,9 @@ function canvasToModel() {
   console.log(linesForBackend);
 }
 
-function sendToRunway() {
-  let canvas = document.getElementById('drawingCanvas');
-  let dataurl = canvas.toDataURL();
+function sendToRunway(w, h) {
+  let dcanvas = document.getElementById('drawingCanvas');
+  let dataurl = dcanvas.toDataURL();
 
   const inputs = { image: dataurl };
   fetch(`http://${IP}:${PORT}/query`, {
@@ -354,10 +359,12 @@ function sendToRunway() {
       let body = document.getElementsByTagName('body')[0];
       let canvas = document.createElement('canvas');
       canvas.id = "imageCanvas";
-      canvas.width = 512;
-      canvas.height = 256;
+      canvas.width = w;
+      canvas.height = h;
       canvas.style.position = 'absolute';
-      canvas.style.right = '100px';
+      let offset = 180 + w;
+      canvas.style.left = `${offset}px`;
+      canvas.style.top = 0;
       body.append(canvas);
       let ctx = canvas.getContext('2d');
 
