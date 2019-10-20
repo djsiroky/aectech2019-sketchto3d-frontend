@@ -60,7 +60,7 @@ new p5(function(p) {
     disableScroll();
     
     //Initialize the canvas
-    drawCanvas = p.createCanvas(p.windowWidth - 180, p.windowHeight);
+    drawCanvas = p.createCanvas(p.windowWidth/2 - 180, p.windowHeight);
     drawCanvas.id("drawingCanvas");
     drawCanvas.position(180, 0);    
   }
