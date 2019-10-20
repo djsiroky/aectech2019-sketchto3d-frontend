@@ -9,7 +9,7 @@ function drawOnCanvas(file) {
     var reader = new FileReader();
     reader.onload = function (e) {
         var dataURL = e.target.result,
-            c = document.querySelector('canvas'),
+            c = document.querySelector('canvas#drawingCanvas'),
             ctx = c.getContext('2d'),
             img = new Image();
 
@@ -19,7 +19,9 @@ function drawOnCanvas(file) {
             // c.width = (window.innerWidth - 180)
             // c.height = window.innerHeight
             var imgHeight = (window.innerWidth/2 - 180)
-            ctx.drawImage(img, 0, 0, imgHeight, imgHeight*ratio);
+            var imgHeight = (img.width * (c.width / img.width)) / ratio;
+            c.height = imgHeight;
+            ctx.drawImage(img, 0, 0, c.width, c.height);
             var pixels = ctx.getImageData(0, 0, c.width, c.height);
             pixels = threshold(pixels, 50);
             ctx.putImageData(pixels, 0, 0);
