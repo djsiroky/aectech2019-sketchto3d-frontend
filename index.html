@@ -15,11 +15,19 @@
       <!-- Change this with the final app logo whn ready -->
       <img id="Logo" type="Icon"><img src="icon/logoplaceholder.svg"/></img>
       <button id="ClearButton" type="button"><img src="icon/draw.svg"/></button>
-
-      <button id="myFileInput" type="file" accept="image/*;capture=camera"><img src="icon/uploadV2.svg" /></button>
+      <button id="myFileInput" type="button"><img src="icon/uploadV2.svg" /></button>
       <button id="to3DModel" type="button"><img src="icon/to3dModel.svg" /></button>
-      <input type="file" id="mypic" accept="image/*" capture="camera">
+      <input type="file" id="mypic" style="display: none" accept="image/*" capture="camera"/>
+
+      <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+      <script>
+        $("#myFileInput").on("click", function() {
+          $("#mypic").trigger("click");
+        });
+      </script>
+
     </div>
+
 
     <div class="main">
       <!-- <canvas id="drawingCanvas"></canvas> -->
@@ -27,5 +35,3 @@
       <script src="sketch.js"></script>
       <script src="importImageFile.js"></script>
     </div>
-
-</body></html>
