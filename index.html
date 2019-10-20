@@ -3,6 +3,7 @@
     <script src="p5.dom.min.js"></script>
     <script src="pressure.min.js"></script>
     <script src="oneEuroFilter.min.js"></script>
+    <script src="importImageFile.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
     
@@ -11,18 +12,14 @@
   <body>
     <div class="sidenav">
       <button id="ClearButton" type="button"><img src="icon/draw.svg"/></button>
-      <button id="myFileInput" type="file"><img src="icon/upload.svg" /></button>
-      <!-- <input id="myFileInput" value="Load Image" type="file" accept="image/*;capture=camera"> -->
-    </div>
+      <button id="myFileInput" type="file" accept="image/*;capture=camera"><img src="icon/upload.svg"/></button>
+      <input type="file" id="mypic" accept="image/*" capture="camera">
+      
 
     <div class="main">
+      <!-- <canvas></canvas> -->
+      <script src="importImageFile.js"></script>
       <script src="sketch.js"></script>
     </div>
-  
 
 </body></html>
-
-<!-- Page content -->
-<div class="main">
-  ...
-</div>
