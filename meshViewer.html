@@ -23,13 +23,13 @@
             rhino3dm().then(async m => {
                 console.log('Loaded rhino3dm.');
                 let rhino = m;
-                let url = 'dummyMesh.3dm';
+                let url = 'assets/dummyMesh.3dm';
                 let res = await fetch(url);
                 let buffer = await res.arrayBuffer();
                 let arr = new Uint8Array(buffer);
                 let doc = rhino.File3dm.fromByteArray(arr);
                 init();
-                let material = new THREE.MeshLambertMaterial({color: 0xffffff});
+                let material = new THREE.MeshLambertMaterial({color: 0xa3a3a3});
                 material.wireframe = true;
 
                 let objects = doc.objects();

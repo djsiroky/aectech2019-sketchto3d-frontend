@@ -30,7 +30,11 @@
       <script language="JavaScript">
         function PopWindowOne()
         {
-            floatingWindow = window.open("meshViewer.html","","height=1000,width=800,scrollbars=no");
+            let width = window.innerWidth*0.8;
+            let height = window.innerHeight*0.8;
+            let leftMargin = window.innerWidth*0.1;
+            let topMargin = window.innerHeight*0.1;
+            floatingWindow = window.open("meshViewer.html","",`height=${height},width=${width},left=${leftMargin},top=${topMargin},scrollbars=no`);
         }
       </script>
 
