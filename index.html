@@ -16,8 +16,9 @@
       <img id="Logo" type="Icon"><img src="icon/logoplaceholder.svg"/></img>
       <button id="ClearButton" type="button"><img src="icon/draw.svg"/></button>
       <button id="myFileInput" type="button"><img src="icon/uploadV2.svg" /></button>
-      <button id="to3DModel" type="button"><img src="icon/to3dModel.svg" /></button>
+      <button onclick="PopWindowOne()" id="to3DModel" type="button"><img src="icon/to3dModel.svg" /></button>
       <input type="file" id="mypic" style="display: none" accept="image/*" capture="camera"/>
+      
 
       <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
       <script>
@@ -25,6 +26,14 @@
           $("#mypic").trigger("click");
         });
       </script>
+
+      <script language="JavaScript">
+        function PopWindowOne()
+        {
+            floatingWindow = window.open("index.html","","height=1000,width=800,scrollbars=no");
+        }
+      </script>
+
 
     </div>
 
@@ -35,3 +44,8 @@
       <script src="sketch.js"></script>
       <script src="importImageFile.js"></script>
     </div>
+
+</body>
+</html>
+
+
