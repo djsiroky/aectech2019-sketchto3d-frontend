@@ -1,7 +1,7 @@
 # GANgaroo
 *a.k.a AECTech2019-sketchto3d-frontend*
 
-![Kanganru_Outback.png](assets\Kanganru_Outback.png)
+![](assets/Kanganru_Outback.png)
 
 ## Introduction
 A web application that enables freehand sketching and attempts to transfer it to a "rendered" mode using a Generative Adversarial Network, while converting any preferred option to a 3d model representation.
