@@ -49,7 +49,7 @@ function threshold(pixels, threshold) {
         var r = d[i];
         var g = d[i + 1];
         var b = d[i + 2];
-        var v = (0.2126 * r + 0.7152 * g + 0.0722 * b >= threshold) ? 255 : 0;
+        var v = (0.2126 * r + 0.0152 * g + 0.0722 * b >= threshold) ? 255 : 0;
         d[i] = d[i + 1] = d[i + 2] = v
     }
     return pixels;
