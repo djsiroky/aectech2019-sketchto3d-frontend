@@ -15,7 +15,7 @@ Team Members:
 
 ## Getting Started
 
-Just fire-Up a web browser and go to this [address](http://184.105.174.119:3001/). Then you can just start sketching and the GAN will sort out the visual representation of your doodle. When happy with the results you can push the data to the backend application which will provide an approximated **Rhino** 3d model rendered on the UI.
+Just fire-Up a web browser and go to this [address](http://157.55.139.151/app/index.html). Then you can just start sketching and the GAN will sort out the visual representation of your doodle. When happy with the results you can push the data to the backend application which will provide an approximated **Rhino** 3d model rendered on the UI.
 
 ## Purpose
 
